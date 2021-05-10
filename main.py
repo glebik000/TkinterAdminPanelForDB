@@ -1,22 +1,64 @@
+from functools import partial
 import tkinter as ui
+from database import *
 
-def print_hi(name):
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-def insertTheData():
-    print("Query should be here!")
-
-class mainWindow:
+def handler(name):
     window = ui.Tk()
-    window.columnconfigure(5, weight=1, minsize=25, pad=10) # should be fixed
-    window.rowconfigure([0, 5], weight=1, minsize=10, pad=10) # should be fixed
-    insertButton = ui.Button(text = "Insert", command=insertTheData)
-    insertButton.grid(row=1, column=4)
+    window.rowconfigure(1, weight=1,minsize=5)
+    my_frame = ui.Frame(master=window, 
+            borderwidth=5)
+    entry = ui.Entry(master=my_frame,
+           width=50)
+    if name == "dialogues":
+        label = ui.Label(master=my_frame,
+                text="dialogue text",
+                width=10)
+    elif name == "theory":
+        label = ui.Label(master=my_frame,
+                text="theory text",
+                width=10)
+    elif name == "questions":
+        label = ui.Label(master=my_frame,
+                text="question text",
+                width=10)
+    elif name == "languages":
+        label = ui.Label(master=my_frame,
+                text="language name",
+                width=10)
+    elif name == "correct":
+        label = ui.Label(master=my_frame,
+                text="is correct",
+                width=10)
+    elif name == "answers":
+        label = ui.Label(master=my_frame,
+                text="answer text",
+                width=10)
+    my_frame.grid(row=0, column=0)
+    label.grid(row=0, column=0)
+    entry.grid(row=0, column=1)
     window.mainloop()
 
+class start_window:
+    conn = create_connection()
+    table_names = ("dialogues", "theory", "questions", "languages", "correct", "answers")
+    window = ui.Tk()
+    for i in range(6):
+        window.rowconfigure(i, weight=1,minsize=5)
+        my_frame = ui.Frame(master=window, 
+                relief=ui.RAISED, 
+                borderwidth=5)
+        my_frame.grid(row=i)
+        button = ui.Button(master=my_frame,
+                text=f"{table_names[i]}", 
+                width=25,
+                command=partial(handler, table_names[i])
+                )
+        button.pack(padx=5, pady=5)
+    window.mainloop()
+    conn.close()
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    adminWindow = mainWindow()
-    print_hi('PyCharm')
+
+    app = start_window()
+    print("Test app");
