@@ -1,7 +1,23 @@
 from functools import partial
 import tkinter as ui
+import sqlite3
+from sqlite3 import Error
+
+conn = None
+
+def create_connection():
+    """Create connection with database sqlite3"""
+    try:
+        #global conn
+        conn = sqlite3.connect("data.db")
+        print("The sqlite3's version is: " + str(sqlite3.version))
+    except Error as e:
+        print(e)
+    
 
 def handler(name):
+
+
     window = ui.Tk()
     window.rowconfigure(1, weight=1,minsize=5)
     my_frame = ui.Frame(master=window, 
@@ -16,6 +32,7 @@ def handler(name):
         label = ui.Label(master=my_frame,
                 text="theory text",
                 width=10)
+        print("The conn from theory button !: ", conn)
     elif name == "questions":
         label = ui.Label(master=my_frame,
                 text="question text",
@@ -57,5 +74,10 @@ class start_window:
 
 
 if __name__ == '__main__':
+
+    create_connection()
+    if conn:
+        conn.close()
+    print("Conn should be closed: ", conn)
     app = start_window()
     print("Test app");
