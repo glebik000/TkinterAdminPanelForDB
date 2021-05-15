@@ -1,4 +1,5 @@
 from functools import partial
+from buttons_for_tables import *
 import tkinter as ui
 from database import *
 
@@ -7,52 +8,116 @@ def handler(name, cur, conn):
     window.rowconfigure(1, weight=1,minsize=5)
     my_frame = ui.Frame(master=window, 
             borderwidth=5)
-    entry = ui.Entry(master=my_frame,
-           width=50)
     if name == "dialogues":
+        entry = ui.Entry(master=my_frame,
+               width=50)
         label = ui.Label(master=my_frame,
                 text="dialogue text",
                 width=10)
-
-        que =   """ INSERT INTO dialogues (dialogue_text)
-                    VALUES(?)
-                """
-        stri = ('test text 1',)
-        cur.execute(que, stri)
-        conn.commit() 
-
+        button = ui.Button(master=my_frame,
+                           text="INSERT",
+                           width=15,
+                           command=partial(handler_diag, cur, conn, entry)
+                           )
+        my_frame.grid(row=0, column=0)
+        label.grid(row=0, column=0)
+        entry.grid(row=0, column=1)
+        button.grid(row=1)
+        window.mainloop()
     elif name == "theory":
+        entry = ui.Entry(master=my_frame,
+               width=50)
         label = ui.Label(master=my_frame,
                 text="theory text",
                 width=10)
-
-        que =   """ INSERT INTO theory (theory_text)
-                    VALUES(?)
-                """
-        stri = ('just a test',)
-        cur.execute(que, stri)
-        conn.commit() 
-
+        button = ui.Button(master=my_frame,
+                           text="INSERT",
+                           width=15,
+                           command=partial(handler_thr, cur, conn, entry)
+                           )
+        my_frame.grid(row=0, column=0)
+        label.grid(row=0, column=0)
+        entry.grid(row=0, column=1)
+        button.grid(row=1)
+        window.mainloop()
     elif name == "questions":
+        entry = ui.Entry(master=my_frame,
+               width=50)
         label = ui.Label(master=my_frame,
                 text="question text",
                 width=10)
+        button = ui.Button(master=my_frame,
+                           text="INSERT",
+                           width=15,
+                           command=partial(handler_qst, cur, conn, entry)
+                           )
+        my_frame.grid(row=0, column=0)
+        label.grid(row=0, column=0)
+        entry.grid(row=0, column=1)
+        button.grid(row=1)
+        window.mainloop()
     elif name == "languages":
+        entry = ui.Entry(master=my_frame,
+               width=50)
         label = ui.Label(master=my_frame,
                 text="language name",
                 width=15)
+        button = ui.Button(master=my_frame,
+                           text="INSERT",
+                           width=15,
+                           command=partial(handler_lang, cur, conn, entry)
+                           )
+        my_frame.grid(row=0, column=0)
+        label.grid(row=0, column=0)
+        entry.grid(row=0, column=1)
+        button.grid(row=1)
+        window.mainloop()
     elif name == "correct":
+        entry = ui.Entry(master=my_frame,
+               width=5)
         label = ui.Label(master=my_frame,
                 text="is correct",
                 width=10)
+        label2 = ui.Label(master=my_frame,
+                text="ID",
+                width=5)
+        entry2 = ui.Entry(master=my_frame,
+               width=5)
+        label3 = ui.Label(master=my_frame,
+                text="Correct(1-YES, 0-NO)",
+                width=15)
+        entry3 = ui.Entry(master=my_frame,
+               width=5)
+        button = ui.Button(master=my_frame,
+                           text="INSERT",
+                           width=15,
+                           command=partial(handler_cor, cur, conn, entry, entry2, entry3)
+                           )
+        my_frame.grid(row=0, column=0)
+        label.grid(row=0, column=0)
+        entry.grid(row=0, column=1)
+        label2.grid(row=1, column=0)
+        entry2.grid(row=1, column=1)
+        label3.grid(row=2, column=0)
+        entry3.grid(row=2, column=1)
+        button.grid(row=3)
+        window.mainloop()
     elif name == "answers":
+        entry = ui.Entry(master=my_frame,
+               width=50)
         label = ui.Label(master=my_frame,
                 text="answer text",
                 width=10)
-    my_frame.grid(row=0, column=0)
-    label.grid(row=0, column=0)
-    entry.grid(row=0, column=1)
-    window.mainloop()
+        button = ui.Button(master=my_frame,
+                           text="INSERT",
+                           width=15,
+                           command=partial(handler_ans, cur, conn, entry)
+                           )
+        my_frame.grid(row=0, column=0)
+        label.grid(row=0, column=0)
+        entry.grid(row=0, column=1)
+        button.grid(row=1)
+        window.mainloop()
 
 class start_window:
     conn = create_connection()
