@@ -11,18 +11,25 @@ def handler(name, cur, conn):
     if name == "dialogues":
         entry = ui.Entry(master=my_frame,
                width=50)
+        entry2 = ui.Entry(master=my_frame,
+               width=50)
         label = ui.Label(master=my_frame,
+                text="theory id",
+                width=10)
+        label2 = ui.Label(master=my_frame,
                 text="dialogue text",
                 width=10)
         button = ui.Button(master=my_frame,
-                           text="INSERT",
-                           width=15,
-                           command=partial(handler_diag, cur, conn, entry)
-                           )
+                text="INSERT",
+                width=15,
+                command=partial(handler_diag, cur, conn, entry, entry2)
+                )
         my_frame.grid(row=0, column=0)
         label.grid(row=0, column=0)
+        label2.grid(row=1, column=0)
         entry.grid(row=0, column=1)
-        button.grid(row=1)
+        entry2.grid(row=1, column=1)
+        button.grid(row=2)
         window.mainloop()
     elif name == "theory":
         entry = ui.Entry(master=my_frame,
@@ -43,18 +50,32 @@ def handler(name, cur, conn):
     elif name == "questions":
         entry = ui.Entry(master=my_frame,
                width=50)
+        entry2 = ui.Entry(master=my_frame,
+               width=50)
+        entry3 = ui.Entry(master=my_frame,
+               width=50)
         label = ui.Label(master=my_frame,
+                text="language id",
+                width=10)
+        label2 = ui.Label(master=my_frame,
+                text="theory id",
+                width=10)
+        label3 = ui.Label(master=my_frame,
                 text="question text",
                 width=10)
         button = ui.Button(master=my_frame,
                            text="INSERT",
                            width=15,
-                           command=partial(handler_qst, cur, conn, entry)
+                           command=partial(handler_qst, cur, conn, entry, entry2, entry3)
                            )
         my_frame.grid(row=0, column=0)
-        label.grid(row=0, column=0)
-        entry.grid(row=0, column=1)
-        button.grid(row=1)
+        label.grid   (row=0, column=0)
+        label2.grid  (row=1, column=0)
+        label3.grid  (row=2, column=0)
+        entry.grid   (row=0, column=1)
+        entry2.grid  (row=1, column=1)
+        entry3.grid  (row=2, column=1)
+        button.grid  (row=3)
         window.mainloop()
     elif name == "languages":
         entry = ui.Entry(master=my_frame,
@@ -76,16 +97,16 @@ def handler(name, cur, conn):
         entry = ui.Entry(master=my_frame,
                width=5)
         label = ui.Label(master=my_frame,
-                text="is correct",
-                width=10)
+                text="question id",
+                width=20)
         label2 = ui.Label(master=my_frame,
-                text="ID",
-                width=5)
+                text="answer id",
+                width=20)
         entry2 = ui.Entry(master=my_frame,
                width=5)
         label3 = ui.Label(master=my_frame,
-                text="Correct(1-YES, 0-NO)",
-                width=15)
+                text="correct(1-YES, 0-NO)",
+                width=20)
         entry3 = ui.Entry(master=my_frame,
                width=5)
         button = ui.Button(master=my_frame,
