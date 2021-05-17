@@ -28,13 +28,13 @@ tables[2]  ="""
                    language_id  INT ,
                    theory_id    INT ,  
                    question_text TEXT,
-                   FOREIGN KEY (language_id)   REFERENCES languages(language_1id),
+                   FOREIGN KEY (language_id)   REFERENCES languages(language_id),
                    FOREIGN KEY (theory_id)     REFERENCES theory   (theory_id)
                    );
             """
 tables[3]  ="""
                 CREATE TABLE IF NOT EXISTS languages (
-                   language_1id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   language_id INTEGER PRIMARY KEY AUTOINCREMENT,
                    language_name VARCHAR(10)
                    );
             """
